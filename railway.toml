@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "rm -rf node_modules package-lock.json && npm install --legacy-peer-deps && npm run build"
+buildCommand = "npm run build"
 
 [deploy]
 startCommand = "npm run start"
@@ -13,7 +13,7 @@ restartPolicyMaxRetries = 10
 nixPkgs = ["nodejs_20", "npm"]
 
 [phases.install]
-cmds = ["rm -rf node_modules package-lock.json", "npm install --legacy-peer-deps"]
+cmds = ["npm install"]
 
 [phases.build]
 cmds = ["npm run build"] 
