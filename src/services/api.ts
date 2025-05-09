@@ -1,4 +1,4 @@
-const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:3001') + '/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 export interface Team {
   _id: string;
@@ -53,7 +53,7 @@ const getAuthHeader = (): Record<string, string> => {
 export const api = {
   // Auth
   async login(email: string): Promise<{ token: string }> {
-    const response = await fetch(`${API_URL}/users/login`, {
+    const response = await fetch(`${API_URL}/api/users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ export const api = {
 
   // Teams
   async getTeams(): Promise<Team[]> {
-    const response = await fetch(`${API_URL}/teams`, {
+    const response = await fetch(`${API_URL}/api/teams`, {
       headers: getAuthHeader(),
     });
     if (!response.ok) throw new Error('Failed to fetch teams');
@@ -74,7 +74,7 @@ export const api = {
   },
 
   async getTeam(id: string): Promise<Team> {
-    const response = await fetch(`${API_URL}/teams/${id}`, {
+    const response = await fetch(`${API_URL}/api/teams/${id}`, {
       headers: getAuthHeader(),
     });
     if (!response.ok) throw new Error('Failed to fetch team');
@@ -82,7 +82,7 @@ export const api = {
   },
 
   async createTeam(name: string, description: string): Promise<Team> {
-    const response = await fetch(`${API_URL}/teams`, {
+    const response = await fetch(`${API_URL}/api/teams`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ export const api = {
   },
 
   async updateTeam(id: string, name: string, description: string): Promise<Team> {
-    const response = await fetch(`${API_URL}/teams/${id}`, {
+    const response = await fetch(`${API_URL}/api/teams/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ export const api = {
   },
 
   async deleteTeam(id: string): Promise<void> {
-    const response = await fetch(`${API_URL}/teams/${id}`, {
+    const response = await fetch(`${API_URL}/api/teams/${id}`, {
       method: 'DELETE',
       headers: getAuthHeader(),
     });
@@ -117,7 +117,7 @@ export const api = {
 
   // Players
   async getTeamPlayers(teamId: string): Promise<Player[]> {
-    const response = await fetch(`${API_URL}/players/team/${teamId}`, {
+    const response = await fetch(`${API_URL}/api/players/team/${teamId}`, {
       headers: getAuthHeader(),
     });
     if (!response.ok) throw new Error('Failed to fetch players');
@@ -131,7 +131,7 @@ export const api = {
     positions: string[],
     teamId: string
   ): Promise<Player> {
-    const response = await fetch(`${API_URL}/players`, {
+    const response = await fetch(`${API_URL}/api/players`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ export const api = {
     jerseyNumber: number,
     positions: string[]
   ): Promise<Player> {
-    const response = await fetch(`${API_URL}/players/${id}`, {
+    const response = await fetch(`${API_URL}/api/players/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -174,7 +174,7 @@ export const api = {
   },
 
   async deletePlayer(id: string): Promise<void> {
-    const response = await fetch(`${API_URL}/players/${id}`, {
+    const response = await fetch(`${API_URL}/api/players/${id}`, {
       method: 'DELETE',
       headers: getAuthHeader(),
     });
@@ -182,7 +182,7 @@ export const api = {
   },
 
   async updateBattingOrder(teamId: string, playerOrders: { playerId: string; battingOrder: number }[]): Promise<Player[]> {
-    const response = await fetch(`${API_URL}/players/team/${teamId}/batting-order`, {
+    const response = await fetch(`${API_URL}/api/players/team/${teamId}/batting-order`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -196,7 +196,7 @@ export const api = {
 
   // Games
   async getTeamGames(teamId: string): Promise<Game[]> {
-    const response = await fetch(`${API_URL}/games/team/${teamId}`, {
+    const response = await fetch(`${API_URL}/api/games/team/${teamId}`, {
       headers: getAuthHeader(),
     });
     if (!response.ok) throw new Error('Failed to fetch games');
@@ -204,7 +204,7 @@ export const api = {
   },
 
   async getGames(teamId: string): Promise<Game[]> {
-    const response = await fetch(`${API_URL}/games/team/${teamId}`, {
+    const response = await fetch(`${API_URL}/api/games/team/${teamId}`, {
       headers: getAuthHeader(),
     });
     if (!response.ok) throw new Error('Failed to fetch games');
@@ -212,7 +212,7 @@ export const api = {
   },
 
   async getGame(id: string): Promise<Game> {
-    const response = await fetch(`${API_URL}/games/${id}`, {
+    const response = await fetch(`${API_URL}/api/games/${id}`, {
       headers: getAuthHeader(),
     });
     if (!response.ok) throw new Error('Failed to fetch game');
@@ -225,7 +225,7 @@ export const api = {
     date: Date,
     isHome: boolean
   ): Promise<Game> {
-    const response = await fetch(`${API_URL}/games`, {
+    const response = await fetch(`${API_URL}/api/games`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -243,7 +243,7 @@ export const api = {
   },
 
   async updateGame(id: string, data: Partial<Game>): Promise<Game> {
-    const response = await fetch(`${API_URL}/games/${id}`, {
+    const response = await fetch(`${API_URL}/api/games/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -256,7 +256,7 @@ export const api = {
   },
 
   async deleteGame(id: string): Promise<void> {
-    const response = await fetch(`${API_URL}/games/${id}`, {
+    const response = await fetch(`${API_URL}/api/games/${id}`, {
       method: 'DELETE',
       headers: getAuthHeader(),
     });
