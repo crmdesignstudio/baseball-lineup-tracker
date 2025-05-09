@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "npm install && npm run build"
+buildCommand = "npm install --platform=linux --arch=x64 && npm run build"
 
 [deploy]
 startCommand = "npm run start"
@@ -10,10 +10,10 @@ restartPolicy = "on-failure"
 restartPolicyMaxRetries = 10
 
 [phases.setup]
-nixPkgs = ["nodejs", "npm"]
+nixPkgs = ["nodejs_20", "npm"]
 
 [phases.install]
-cmds = ["npm install --production=false"]
+cmds = ["npm install --platform=linux --arch=x64"]
 
 [phases.build]
 cmds = ["npm run build"] 
