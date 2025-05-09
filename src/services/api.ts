@@ -1,4 +1,6 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+// In development, use localhost. In production, use the Railway backend URL
+const API_URL = import.meta.env.VITE_API_URL || 
+  (import.meta.env.PROD ? 'https://web-production-fbfcc.up.railway.app' : 'http://localhost:3001');
 
 export interface Team {
   _id: string;
