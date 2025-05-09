@@ -41,6 +41,12 @@
     "vite": "^5.1.4"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": "20.11.1",
+    "npm": "10.2.4"
+  },
+  "overrides": {
+    "rollup": {
+      "@rollup/rollup-linux-x64-gnu": "4.9.5"
+    }
   }
 }
